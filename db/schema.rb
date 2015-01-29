@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129081648) do
+ActiveRecord::Schema.define(version: 20150129143612) do
 
   create_table "options", force: true do |t|
     t.integer  "question_id"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150129081648) do
   create_table "questions", force: true do |t|
     t.string   "type"
     t.string   "name"
-    t.string   "pre_filled_field_hint"
+    t.string   "prefilled_field_hint"
     t.string   "mandatory"
     t.integer  "max_input_length"
     t.integer  "input_field_length"
