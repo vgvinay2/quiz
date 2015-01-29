@@ -8,6 +8,7 @@
 </head>
 <body>
 <p class="notice"><%= notice %></p>
+<p class="notice"><%= flash[:custom_notice] if flash[:custom_notice].present? %></p>
 
 <p class="alert"><%= alert %></p>
 
