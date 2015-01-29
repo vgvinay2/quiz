@@ -1,0 +1,2 @@
+<% options = params[:id].blank? ? nil : Question.find(params[:id]).options.collect(&:name).join("\n") %>
+<%= content_tag(:span, text_area( :question, :option, :value => options, :name => 'question[text_options]', :cols => "30", :rows=> "5" ) ) %>

@@ -1,0 +1,15 @@
+
+<% new_or_existing = option.new_record? ? 'new' : 'existing' %>
+<% prefix = "question[#{new_or_existing}_options][]" %>
+
+<%= fields_for prefix, option do |qf| -%>
+	<li class="option" style="line-height:20px;"><nobr> Option: <%= qf.text_field 'name',:class=>'input_text',:size=>30 %>Default<%= qf.check_box 'default_value',:class=>''%> &nbsp;&nbsp;    
+    	<a onclick="javascript:jQuery(this).parent().parent('li').remove();" href="javascript:void(0);">
+			<%= image_tag "/images/cancel_f2.png", :alt=>"Remove", :height => "15" %>                
+        </a>
+        <%#= link_to_function "remove" , :onclick => "$(this).up('.option').remove()" %>
+        </nobr>
+	</li>
+<% end %>
+<%#= sortable_element("add_option_txt_field", :onUpdate=>"function(){return false}") %>
+

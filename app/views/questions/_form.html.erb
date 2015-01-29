@@ -1,0 +1,151 @@
+<%= javascript_include_tag "idg_question" %>
+<div id="container">
+  <div class="section_block full_section">
+    <h2><%= @page_properties[:menu_title] if @page_properties[:menu_title].present? %></h2>
+
+    <div class="article_new_main">
+      <%= form_for :questions, :url => {:action => (@question.new_record?) ? "create_question" : "update_question", :id => @question} do |f| -%>
+
+          <div class="validation_box">
+            <%= raw error_messages_sorted(@question) %>
+          </div>
+
+          <% if params[:action]=="edit" %>
+              <div class="form_data">
+                <label for="text_head">Question id :</label>
+
+                <p><%= @question.id %></p>
+              </div>
+          <% end %>
+
+          <div class="form_data">
+            <label for="text_head">Question Text <span>* </span>:</label>
+            <%= f.text_field :name, :class => 'input_text', :size => 30 %>
+          </div>
+
+          <div id='field_length_label' class="asset_form">
+            <div class="form_data">
+              <label for="text_head">Input field length :</label>
+              <%= f.text_field :input_field_length, :class => 'input_text_question input_text', :size => 30 %>
+            </div>
+          </div>
+
+          <div id='prefilled_hint'>
+            <div class="form_data">
+              <label for="text_head">pre_filled_field_hint :</label>
+              <%= f.text_field :pre_filled_field_hint, :class => 'input_text', :size => 30 %>
+            </div>
+          </div>
+
+          <div id='default_value' style='display:none'>
+            <div class="form_data">
+              <label for="text_head">Default Value :</label>
+              <%= f.text_field :default_value, :class => 'input_text', :size => 30 %>
+            </div>
+          </div>
+
+          <div class="form_data">
+            <label for="text_head">Select a Type of Question <span>* </span>:</label>
+            <%= f.select 'question_type', QUESTION_TYPES, {:include_blank => "Select"}, :class => 'question_change_type select_box' %>
+            <%= content_tag(:span, nil, :id => 'view_type') %>
+          </div>
+
+          <div id='verification_data' style="display:none;">
+            <div class="form_data">
+              <label for="text_head">Verification Method :</label>
+              <%= f.select 'verification_method_id', VERIFICATION_METHOD.keys, {:include_blank => "Select", :selected => @verification_method ? @verification_method.name : ''}, :onchange => "verification_method_name(this)", :class => "select_box" %>
+            </div>
+
+            <% unless (@verification_method.nil? ? true : @verification_method.name.blank?) %>
+                <div id="verification" style="display:none;">
+                  <div class="form_data">
+                    <label for="text_head">Enter Message :</label>
+                    <%= text_field_tag 'verification_method_message', '', :class => 'input_text', :size => 30, :value => @verification_method.message %>
+                  </div>
+                </div>
+            <% else %>
+                <div id="verification" style="display:none;">
+                  <div class="form_data">
+                    <label for="text_head">Enter Message :</label>
+                    <%= text_field_tag 'verification_method_message', '', :class => 'input_text', :size => 30 %>
+                  </div>
+                </div>
+            <% end %>
+
+            <div id='max_char' style='display:none'>
+
+              <div class="form_data">
+                <label for="text_head">Maximum Length :</label>
+                <%= f.text_field :max_length, :onkeypress => 'return blockNonNumbers(this, event, true, true);', :class => 'input_text', :size => 30 %>
+              </div>
+            </div>
+            <div id='max_val' style='display:none'>
+              <div class="form_data">
+                <label for="text_head">Maximum Value :</label>
+                <%= f.text_field :max_number, :class => 'input_text', :size => 30 %>
+              </div>
+            </div>
+
+            <div id='min_val' style='display:none'>
+              <div class="form_data">
+                <label for="text_head">Minimum Value :</label>
+                <%= f.text_field :min_number, :class => 'input_text', :size => 30 %>
+              </div>
+            </div>
+
+            <div id='positive_val' style='display:none'>
+              <div class="form_data">
+                <label for="text_head">Positive Value :</label>
+                <% value = @question.new_record? ? '' : (@question.options.first.positive_value unless @question.options.blank?) %>
+                <%= text_field :boolean, :positive_value, :value => value, :class => 'input_text', :name => 'question[boolean][positive_value]', :size => 30 %>
+              </div>
+            </div>
+
+            <div id='negative_val' style='display:none'>
+              <div class="form_data">
+                <label for="text_head">Negative Value :</label>
+                <% value = @question.new_record? ? '' : (@question.options.first.negative_value unless @question.options.blank?) %>
+                <%= text_field :boolean, :negative_value, :value => value, :class => 'input_text', :name => 'question[boolean][negative_value]', :size => 30 %>
+              </div>
+            </div>
+            <div class="question_form_option" id="option_list">
+              <ul style="list-style-type:none;" id='add_option_txt_field'>
+                <%= render :partial => '/questions/option', :collection => @question.options %>
+                <%#= content_tag(:li, link_to('Import', :action => 'add_option_from_text', :id => @question.id ) ) unless @question.new_record? %>
+              </ul>
+            </div>
+
+            <div id='add_option' class="remove_part_ajax">
+       <span class="button">
+            <a href="javascript:void(0)" data-url="/admin/questions/add_options_in_text" data-update="option_list" data-paramtype="params_get" data-param="" data-remove="remove_part_ajax" class="question_import_option ajax_form_call">Import
+              Options</a></span>
+            <span class="button"><a href="javascript:void(0)" class="add_new_option">Add New Option</a>
+        </span>
+              <%#= content_tag(:span, link_to_remote('Import Options', :update => 'option_list', :success => "$('add_option').remove()", :url => { :action => 'add_options_in_text', :id => @question.id } ), :class => 'adminLinkButton') %>
+              <%#= content_tag(:span, add_option_link('Add New Option'), :class => 'adminLinkButton') %>
+            </div>
+            <% question_params = if params[:campaign_id]
+                                   {:controller => 'questions', :action => 'list', :campaign_id => params[:campaign_id]}
+                                 elsif params[:company_id]
+                                   {:controller => 'questions', :action => 'list', :company_id => params[:company_id]}
+                                 else
+                                   {:controller => 'questions', :action => 'list'}
+                                 end %>
+          </div>
+          <div>
+            <div class="button">
+              <%= submit_tag (@question and @question.new_record?) ? 'Save' : 'Update' %>
+            </div>
+            <div class="button">
+              <%= link_to('Cancel', question_params, {:class => "submit_email"}) %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+

@@ -1,0 +1,27 @@
+<%= hidden_field_tag :campaign_id, value = params[:campaign_id] if params[:campaign_id] %>
+<% for question in @questions%>
+        <tr>
+                <td class="list_table">
+               <%= (question.id) ? (question.id) : "-" %>
+            </td>
+
+            <td class="list_table">
+               <%= (question.name) ? link_to("#{question.name}", :action => 'edit', :id => question.id,:campaign_id=>params[:campaign_id]) : "-" %>
+            </td>
+
+            <td class="list_table">
+                <%=(question.type) ? (question.type) : "-" %>
+            </td>
+
+            
+                   <% unless question.questionnaires.blank? %>
+	<td>	   <%= raw question.questionnaires.collect{|questionnaire| (questionnaire.name ? (link_to("#{questionnaire.name}", :controller => "questionnaires", :action => "edit_registration", :id => questionnaire.id,:campaign_id=>params[:campaign_id])) : '-')}.join(', ') %></td>
+
+<td></td>
+                    <% else %>
+<td></td>
+	<td>	<input class="delete_checkbox" type="checkbox" value=<%=question.id%> name="document[ids][]"></td>
+        <%end %>
+            
+        </tr>
+<% end %>
