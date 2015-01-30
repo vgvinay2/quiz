@@ -1,7 +1,8 @@
 <h1>Hi There!!!</h1>
 
 <% if user_signed_in? == false %>
-<%= link_to "Click here to login", new_user_session_path %>
+<%= link_to "Click here to login", new_user_session_path %> /
+<%= link_to "Sign Up", new_user_registration_path %>
 <% else%>
 <%= link_to "Sign_out", destroy_user_session_path, :method  => :delete %>
 <% end %>

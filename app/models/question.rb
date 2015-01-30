@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
   scope :single_multiple_questions, {:conditions => ['type in ( ? )', ['SingleAnswerQuestion', 'MultipleAnswerQuestion']]}
 
   after_update :save_options
-  validate :question_validate
+ # validate :question_validate
 
   def question_validate
     errors[:base] << ("1_Question should not be blank") if name.blank?

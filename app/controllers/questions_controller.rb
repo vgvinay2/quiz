@@ -33,35 +33,15 @@ class QuestionsController < ApplicationController
   end
 
   def question_new_search
-    #@page_properties={:selected_menu=>'question_list',:menu_title=>'Create New Question'}
-    @page_properties={:selected_menu=>'question_list',:menu_title=>'Question Search'}
     @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
     @search = true
     render :action =>"list"
-    #pagination('list', @site.find_component_by_name('question_list_search'), 'question_list')
   end
 
   def create_question
-    logger.info "----#{params.inspect}------"
-    @page_properties={:selected_menu=>'question_list',:menu_title=>'Question'}
-    params[:question][:verification_method_id] = params[:question][:verification_method_id], params[:verification_method_message]
-    logger.info "---#{params[:question].inspect}---"
     @question = Question.new(params[:question])
-    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
-    @company = Company.find(params[:company_id]) if params[:company_id]
-    if @question.save
-      flash[:notice]="Question was created Successfully"
-      redirect_to(
-          if params[:campaign_id]
-            { :controller => 'admin/questions' , :action => 'list', :campaign_id => params[:campaign_id] }
-          elsif params[:company_id]
-            { :controller => 'admin/questions' , :action => 'list', :company_id => params[:company_id] }
-          else
-            {:controller => 'admin/questions' , :action => 'list' }
-          end)
-    else
-      render :template => 'admin/questions/new_question'
-    end
+    @question.save
+    render :partial => 'questions/question_list_temp'
   end
 
   def edit_question

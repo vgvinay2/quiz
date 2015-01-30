@@ -1,28 +1,28 @@
 <% action_selection = {:edit => 'edit', :delete_question => 'delete_question', :editnaire => 'editnaire'} %>
-<% url_params = Proc.new{|action| 
+<% url_params = Proc.new{|action|
 
-		if params[:campaign_id] 
-			{:controller => 'questions', :action => action, :id => question.id, :campaign_id => params[:campaign_id] } 
+		if params[:campaign_id]
+			{:controller => 'questions', :action => action, :id => question.id, :campaign_id => params[:campaign_id] }
 		elsif params[:company_id]
 			{:controller => 'questions', :action => action, :id => question.id, :company_id => params[:company_id] }
 		else
 			{:controller => 'questions', :action => action, :id => question.id }
-		end 
+		end
 
 	}
 %>
 
 <tr>
-	<%=content_tag(:td, (question.id || "-"), :class => "list_table")%>            
+	<%=content_tag(:td, (question.id || "-"), :class => "list_table")%>
 	<%=content_tag(:td, ((question.name) ? link_to("#{question.name}", url_params.call(action_selection[:edit])) : "-"), :class => "list_table")%>
 	<%=content_tag(:td, (question.type || "-"), :class => "list_table")%>
 
 	<% content_tag(:td, :class => "list_table") do %>
 	    <%= unless question.questionnaires.blank?
-			    question.questionnaires.collect do |questionnaire| 
-					if questionnaire.name 
-						auhtorized?('admin/questionnaires', 'editnaire') ? link_to("#{questionnaire.name}", url_params.call(action_selection[:editnaire]).merge({:id => questionnaire.id, :controller => 'questionnaires'})) : questionnaire.name  
-					else 
+			    question.questionnaires.collect do |questionnaire|
+					if questionnaire.name
+						auhtorized?('admin/questionnaires', 'editnaire') ? link_to("#{questionnaire.name}", url_params.call(action_selection[:editnaire]).merge({:id => questionnaire.id, :controller => 'questionnaires'})) : questionnaire.name
+					else
 						'-'
 					end
 				end.join(', ')
