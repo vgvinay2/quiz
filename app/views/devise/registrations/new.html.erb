@@ -20,9 +20,18 @@
     </div>
 
     <div><%= f.label :password_confirmation %><br/>
-      <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+
+    <div><%= label_tag 'Secure Code' %><br/>
+      <%= text_field_tag 'challenge_secure_code', "XuTvB19ys",options = {readonly: true} %>
+    </div>
+
+    <div><%= label_tag 'Kindly Enter the Secure Code' %><br/>
+      <%= text_field_tag 'response_secure_code' %>
+    </div>
 
     <div><%= f.submit "Sign up" %></div>
 <% end %>
 
-<%#= render "/shared/links" %>
+<%= render "devise/shared/links" %>
