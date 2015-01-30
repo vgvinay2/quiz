@@ -1,0 +1,16 @@
+.group_fixed{float:left;width:100%;padding-bottom:20px;font-size:14px;font-family:"arial"}
+.group_fixed label{float:left;width:25%;padding-top:6px;}
+.group_fixed input[type="text"]{float:left;width:40%;padding:6px 10px;font-size:14px;font-family:"arial";border:1px solid #ccc;}
+.group_fixed input[type="checkbox"]{float:left;width:51%;padding:6px 10px;font-size:14px;font-family:"arial";border:1px solid #ccc;}
+.group_fixed input[type="password"]{float:left;width:40%;padding:6px 10px;font-size:14px;font-family:"arial";border:1px solid #ccc;}
+.group_fixed input[type="email"]{float:left;width:40%;padding:6px 10px;font-size:14px;font-family:"arial";border:1px solid #ccc;}
+.group_fixed input[type="submit"]{float:left;display: inline-block;width: 70px;width:20%;padding:15px 10px;font-size:14px;font-family:"arial";border:8px solid #ccc;}
+.add {text-align: center;}
+.group_fixed select{font-size:14px;float:left;width:41.5%;padding:6px 10px;height:30px;border:1px solid #ccc;}
+.check_group_fixed{float:left;width:100%;}
+.check_group_fixed input{float:left;}
+.check_group_fixed label{float:left;width:25%;font-size:14px;font-family:"arial";padding-right:10px;}
+.check_group_fixed > label{padding-bottom:20px;}
+.check_group_fixed input[type="checkbox"]{float:left;width:auto;}
+.group_fixed_ribbon1{float:left;width:100%;margin-right:2%;}
+.group_fixed_ribbon1 p{float:left;width:100%;padding-bottom:20px;}

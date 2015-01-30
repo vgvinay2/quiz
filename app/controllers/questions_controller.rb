@@ -1,7 +1,5 @@
 class QuestionsController < ApplicationController
 
-
-
   def index
     @page_properties = { :selected_menu => 'question_list', :menu_title => 'Questions' }
     @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
@@ -22,7 +20,6 @@ class QuestionsController < ApplicationController
     @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
     @company = Company.find(params[:company_id]) if params[:company_id]
     session[:per_page] = ( params[:per_page] ||= session[:per_page] || "30" )
-    #pagination('list', @site.find_component_by_name('QuestionList'), 'question_list')  #(render_template,partial_template,replace_html_div)
   end
 
   def new_question
@@ -69,7 +66,6 @@ class QuestionsController < ApplicationController
           end)
 
     else
-      @page_properties={:selected_menu=>'question_list',:menu_title=>'Edit Question'}
       render :template => 'admin/questions/edit_question'
     end
   end

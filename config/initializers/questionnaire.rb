@@ -1,6 +1,6 @@
 ATTRIBUTE = { "TextAnswer" => "free_text", "HiddenAnswer" => "free_text", "TextBlockAnswer" => "text_block" , "NumberAnswer" => "number", "YearAnswer" => "year", "DateAnswer" => "date", "SingleAnswer" => "option_id", "MultipleAnswer" => "option_ids", "BooleanAnswer" => "option_id" }
 
-QUESTION_TYPES = ['TextQuestion', 'HiddenQuestion', 'TextBlockQuestion','NumberQuestion','DateQuestion','YearQuestion','SingleAnswerQuestion','MultipleAnswerQuestion', 'BooleanQuestion']
+QUESTION_TYPES = ['TextQuestion', 'TextBlockQuestion', 'NumberQuestion','DateQuestion', 'YearQuestion', 'SingleAnswerQuestion', 'MultipleAnswerQuestion', 'BooleanQuestion']
 
 QUESTION_ANSWER_CONVERTER = { "TextQuestion" => "TextAnswer", "HiddenQuestion" => "HiddenAnswer", "TextBlockQuestion" => "TextBlockAnswer" , "NumberQuestion" => "NumberAnswer", "YearQuestion" => "YearAnswer", "DateQuestion" => "DateAnswer", "SingleAnswerQuestion" => "SingleAnswer", "MultipleAnswerQuestion" => "MultipleAnswer", "BooleanQuestion" => "BooleanAnswer" }
 

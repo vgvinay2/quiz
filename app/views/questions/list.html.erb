@@ -1,37 +1,36 @@
-<%debugger%>
+<% debugger %>
 <div class="section_block full_section">
-    <h2>Question Search</h2>
-    <div class="section_content">
-            <% question_params = if params[:campaign_id]
-                                {:controller=>'questions', :action => 'new_question', :campaign_id => params[:campaign_id]}
-                                elsif params[:company_id]
-                                {:controller=>'questions', :action => 'new_question', :company_id => params[:company_id]}
-                                else
-                                {:controller=>'questions', :action => 'new_question'}
-                                end %>
+  <h2>Question Search</h2>
 
-                                <%= form_tag({:controller=>"questions",:action=>"question_new_search"},{:method=>"get"}) %>
-                                <%= hidden_field_tag(:campaign_id, params[:campaign_id]) if params[:campaign_id] %>
-                                <div class="form_data question_searchs">
-                                            <label>Question ID :</label> 
-                                            <%= text_field :question, :id,:class=>"input_text" %>
-                                </div>
+  <div class="section_content">
+    <% question_params = if params[:campaign_id]
+                           {:controller => 'questions', :action => 'new_question', :campaign_id => params[:campaign_id]}
+                         elsif params[:company_id]
+                           {:controller => 'questions', :action => 'new_question', :company_id => params[:company_id]}
+                         else
+                           {:controller => 'questions', :action => 'new_question'}
+                         end %>
 
-                                <div class="form_data question_searchs">
-                                            <label>Question Name :</label> 
-                                            <%= text_field :question, :name,:class=>"input_text"%>
-                                </div>            
-                                <div class="button">
-                                        <%= content_tag(:td, submit_tag("Search"), :class => "button" ) %>
-                                 </div>  
-                                </form> 
+    <%= form_tag({:controller => "questions", :action => "question_new_search"}, {:method => "get"}) %>
+    <%= hidden_field_tag(:campaign_id, params[:campaign_id]) if params[:campaign_id] %>
+    <div class="form_data question_searchs">
+      <label>Question ID :</label>
+      <%= text_field :question, :id, :class => "input_text" %>
+    </div>
+
+    <div class="form_data question_searchs">
+      <label>Question Name :</label>
+      <%= text_field :question, :name, :class => "input_text" %>
+    </div>
+    <div class="button">
+      <%= content_tag(:td, submit_tag("Search"), :class => "button") %>
+    </div>
+    </form>
 
 
+  </div>
+</div>
 
-                     
-      </div> 
-      </div>               
-
-       <div id = ''>
-                            <%= @search ? (component_table_list(SrComponent.find_component_by_name("question_list_search")))    : (component_table_list(SrComponent.find_component_by_name("QuestionList"))) %>
-                    </div>     
+<div id=''>
+  <%= @search ? (component_table_list(SrComponent.find_component_by_name("question_list_search"))) : (component_table_list(SrComponent.find_component_by_name("QuestionList"))) %>
+</div>
