@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
   end
 
   def create_question
-    @question = Question.new(params[:question])
+    @question = Question.new(params[:questions])
     @question.save
     render :partial => 'questions/question_list_temp'
   end

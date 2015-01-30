@@ -39,14 +39,7 @@
         </div>
       </div>
 
-      <div id='default_value' style='display:none'>
-        <div class="group_fixed">
-          <label for="text_head">Default Value :</label>
-          <%= f.text_field :default_value, :class => 'input_text', :size => 30 %>
-        </div>
-      </div>
-
-      <div id='max_char' style='display:none'>
+     <div id='max_char' style='display:none'>
         <div class="group_fixed">
           <label for="text_head">Maximum Length :</label>
           <%= f.text_field :max_length, :onkeypress => 'return blockNonNumbers(this, event, true, true);', :class => 'input_text', :size => 30 %>
