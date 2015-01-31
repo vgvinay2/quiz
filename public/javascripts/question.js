@@ -2,34 +2,34 @@ $(document).ready(function () {
     $('.question_change_type').change(function () {
         var question_type = $(this).find('option:selected').attr('value');
         // alert('question_type='+question_type);
-     switch (question_type) {
-        case '':
-            hide_and_disable([], ['negative_val', 'positive_val', 'max_char', 'field_length_label', 'field_length_field', 'verification'], false)
-            break
-        case 'TextQuestion':
-            hide_and_disable(['max_char', 'field_length_label', 'field_length_field'], ['negative_val', 'positive_val', 'max_val', 'min_val', 'allow_others'], false)
-            break
-        case 'TextBlockQuestion':
-            hide_and_disable(['max_char', 'field_length_label', 'field_length_field'], ['negative_val', 'positive_val', 'max_val', 'min_val', 'allow_others'], false)
-            break
-        case 'NumberQuestion':
-            hide_and_disable(['max_val', 'min_val', 'field_length_label', 'field_length_field'], ['negative_val', 'positive_val', 'max_char', 'allow_others'], false)
-            break
-        case 'DateQuestion':
-            hide_and_disable([], ['negative_val', 'positive_val', 'max_char', 'max_val', 'min_val', 'allow_others', 'field_length_label', 'field_length_field'], false)
-            break
-        case 'YearQuestion':
-            hide_and_disable([], ['negative_val', 'positive_val', 'max_char', 'max_val', 'min_val', 'allow_others', 'field_length_label', 'field_length_field'], false)
-            break
-        case 'SingleAnswerQuestion':
-            hide_and_disable(['allow_others'], ['negative_val', 'positive_val', 'max_char', 'max_val', 'min_val', 'field_length_label', 'field_length_field'], true)
-            break
-        case 'MultipleAnswerQuestion':
-            hide_and_disable(['allow_others'], ['negative_val', 'positive_val', 'max_char', 'max_val', 'min_val', 'field_length_label', 'field_length_field'], true)
-            break
-        case 'BooleanQuestion':
-            hide_and_disable(['negative_val', 'positive_val'], ['max_char', 'max_val', 'min_val', 'allow_others', 'field_length_label', 'field_length_field'], false)
-            break
+        switch (question_type) {
+            case '':
+                hide_and_disable([], ['negative_val', 'positive_val', 'max_char', 'field_length_label', 'field_length_field', 'verification'], false)
+                break
+            case 'TextQuestion':
+                hide_and_disable(['max_char', 'field_length_label', 'field_length_field'], ['negative_val', 'positive_val', 'max_val', 'min_val', 'allow_others'], false)
+                break
+            case 'TextBlockQuestion':
+                hide_and_disable(['max_char', 'field_length_label', 'field_length_field'], ['negative_val', 'positive_val', 'max_val', 'min_val', 'allow_others'], false)
+                break
+            case 'NumberQuestion':
+                hide_and_disable(['max_val', 'min_val', 'field_length_label', 'field_length_field'], ['negative_val', 'positive_val', 'max_char', 'allow_others'], false)
+                break
+            case 'DateQuestion':
+                hide_and_disable([], ['negative_val', 'positive_val', 'max_char', 'max_val', 'min_val', 'allow_others', 'field_length_label', 'field_length_field'], false)
+                break
+            case 'YearQuestion':
+                hide_and_disable([], ['negative_val', 'positive_val', 'max_char', 'max_val', 'min_val', 'allow_others', 'field_length_label', 'field_length_field'], false)
+                break
+            case 'SingleAnswerQuestion':
+                hide_and_disable(['allow_others'], ['negative_val', 'positive_val', 'max_char', 'max_val', 'min_val', 'field_length_label', 'field_length_field'], true)
+                break
+            case 'MultipleAnswerQuestion':
+                hide_and_disable(['allow_others'], ['negative_val', 'positive_val', 'max_char', 'max_val', 'min_val', 'field_length_label', 'field_length_field'], true)
+                break
+            case 'BooleanQuestion':
+                hide_and_disable(['negative_val', 'positive_val'], ['max_char', 'max_val', 'min_val', 'allow_others', 'field_length_label', 'field_length_field'], false)
+                break
         }
     });
 
@@ -41,7 +41,7 @@ $(document).ready(function () {
 });
 
 function default_select() {
-   var question_type = $('.question_change_type option:selected').attr('value');
+    var question_type = $('.question_change_type option:selected').attr('value');
     switch (question_type) {
         case '':
             hide_and_disable([], ['negative_val', 'positive_val', 'max_char', 'field_length_label', 'field_length_field', 'max_val', 'min_val', 'allow_others'], false)

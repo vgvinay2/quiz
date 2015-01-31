@@ -1,0 +1,37 @@
+<div class="section_block full_section">
+  <h2>Question Search</h2>
+
+  <div class="section_content">
+    <%= form_tag({:controller => "questions", :action => "question_new_search"}, {:method => "get"}) %>
+    <div class="group_fixed">
+      <label>Question ID :</label>
+      <%= text_field :question, :id, :class => "input_text" %>
+    </div>
+    <div class="group_fixed">
+      <label>Question Name :</label>
+      <%= text_field :question, :name, :class => "input_text" %>
+    </div>
+    <div class="group_fixed">
+      <%= content_tag(:td, submit_tag("Search"), :class => "button") %>
+    </div>
+    </form>
+  </div>
+</div>
+
+<table border="2">
+  <tr>
+    <th>Id :</th>
+    <th>Name :</th>
+    <th>Type</th>
+  </tr>
+  <% @questions.each do |question| %>
+      <tr>
+        <td><%= (question.id) ? (question.id) : '-' %></td>
+        <td><%= (question.name) ? link_to( "#{question.name}", edit_question_path(question) ) : '-' %></td>
+        <td><%= (question.type) ? (question.type) : '-' %></td>
+      </tr>
+  <% end %>
+
+</table><br />
+<%= will_paginate @questions %>
+

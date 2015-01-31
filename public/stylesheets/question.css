@@ -14,3 +14,4 @@
 .check_group_fixed input[type="checkbox"]{float:left;width:auto;}
 .group_fixed_ribbon1{float:left;width:100%;margin-right:2%;}
 .group_fixed_ribbon1 p{float:left;width:100%;padding-bottom:20px;}
+#ajax-indicator{position:absolute;background-color:#bbb;border:1px solid #bbb;top:35%;left:40%;width:20%;font-weight:700;text-align:center;padding:.6em;z-index:100;filter:alpha(opacity=50);opacity:.5}

@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
   has_many :answers
-  has_many :options
+  has_many :options, dependent: :destroy
   accepts_nested_attributes_for :options, reject_if: proc { |attributes| attributes['name'].blank? }
 
   scope :single_multiple_questions, {:conditions => ['type in ( ? )', ['SingleAnswerQuestion', 'MultipleAnswerQuestion']]}
@@ -11,17 +11,6 @@ class Question < ActiveRecord::Base
   def question_validate
     errors[:base] << ("1_Question should not be blank") if name.blank?
     errors[:base] << ("1_Question type should not be blank") if type.blank?
-  end
-
-  def update_ext_attr_schema # Once alias_name saved in question, it won't be changed while updating
-    if self.specific_to.eql?('Article')
-      ext_attr_schema = self.get_ext_attr_schema
-      if ['SingleAnswerQuestion', 'MultipleAnswerQuestion', 'BooleanQuestion'].include? self[:type]
-        ext_attr_schema.symbol_type = 'Option'
-        ext_attr_schema.options = self.options
-      end
-      ext_attr_schema.save!
-    end
   end
 
   def boolean=(boolean)
