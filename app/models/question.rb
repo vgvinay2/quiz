@@ -1,10 +1,7 @@
 class Question < ActiveRecord::Base
   has_many :answers
-  has_many :subscribers, :through => :answers
-  has_many :questionnaire_questions
-  has_many :questionnaires, :through => :questionnaire_questions
   has_many :options
-  belongs_to :verification_method
+  accepts_nested_attributes_for :options, reject_if: proc { |attributes| attributes['name'].blank? }
 
   scope :single_multiple_questions, {:conditions => ['type in ( ? )', ['SingleAnswerQuestion', 'MultipleAnswerQuestion']]}
 
@@ -48,13 +45,8 @@ class Question < ActiveRecord::Base
     self[:type]
   end
 
-  # To check whether the question is mandatory or not.
-  # Mandatory entry will be available in questionnaire_question table
-  def is_mandatory?(questionnaire_id)
-    self.questionnaire_questions.collect { |i| i.mandatory if i.questionnaire_id == questionnaire_id }.include?(true)
-  end
-
   def new_options=(new_options)
+    debugger
     new_options.collect do |option|
       if option[:name]
         options.build(option) unless (option[:name].empty? or option[:name].delete(' ').eql?(''))
@@ -81,8 +73,8 @@ class Question < ActiveRecord::Base
 
   # This method is called in the after_update
   def save_options
+    debugger
     options.collect { |option| option.save }
-    self.verification_method.save if (self.verification_method and self.verification_method.changed?)
   end
 
 

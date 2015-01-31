@@ -114,8 +114,7 @@ function verfication_default() {
 
 
 $(document).on('click', '.add_new_option', function () {
-    //var add_option = "<li class='option'> <nobr> Option: <input type='text' size='30' name='question[new_options][][name]' id='question_new_options__name' class='input_text'> <a href='javascript:void(0);' class='close_button_option' data-removeparentelement='li'><img height='15' src='/images/cancel_f2.png' alt='Remove'></a></nobr></li>";
-    var add_option = "<li class='option'> <nobr> Option: <input type='text' size='30' name='question[new_options][][name]' id='question_new_options__name' class='input_text'>Default:<input id='question_new_options__default_value' class='' type='checkbox' value='1' name='question[new_options][][default_value]'> <a href='javascript:void(0);' class='close_button_option' data-removeparentelement='li'><img height='15' src='/images/cancel.png' alt='Remove'></a></nobr></li>";
+    var add_option = "<li class='option'> <nobr> Option: <input type='text' size='30' name='questions[options_attributes][][name]' id='question_new_options__name' class='input_text'>Correct Option:<input id='question_new_options__default_value' class='' type='checkbox' value='1' name='questions[options_attributes][][default_value]'> <a href='javascript:void(0);' class='close_button_option' data-removeparentelement='li'><img height='15' src='/images/cancel.png' alt='Remove'></a></nobr></li>";
     $('#option_list #add_option_txt_field').append(add_option);
 });
 $(document).on('click', '.close_button_option', function () {

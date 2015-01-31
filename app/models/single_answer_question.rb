@@ -1,0 +1,3 @@
+class SingleAnswerQuestion < MultipleChoiceQuestion
+
+end

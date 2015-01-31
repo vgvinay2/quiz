@@ -29,45 +29,18 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
-  def question_new_search
-    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
-    @search = true
-    render :action =>"list"
-  end
-
   def create_question
-    @question = Question.new(params[:questions])
+    @question = Question.new(params_questions)
+    debugger
     @question.save
     render :partial => 'questions/question_list_temp'
-  end
-
-  def edit_question
-    @page_properties={ :selected_menu => 'question_list', :menu_title => 'Edit Question' }
-    @question = Question.find(params[:id])
-    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
-    @company = Company.find(params[:company_id]) if params[:company_id]
-    @verification_method = @question.verification_method
   end
 
   def update_question
     params[:question][:existing_options] ||= {}
     params[:question][:verification_method_id] = params[:question][:verification_method_id], params[:verification_method_message]
     @question = Question.find(params[:id])
-    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
-    @company = Company.find(params[:company_id]) if params[:company_id]
-    if @question.update_attributes(params[:question])
-      redirect_to(
-          if params[:campaign_id]
-            { :controller => 'admin/questions' , :action => 'list', :campaign_id => params[:campaign_id] }
-          elsif params[:company_id]
-            { :controller => 'admin/questions' , :action => 'list', :company_id => params[:company_id] }
-          else
-            {:controller => 'admin/questions' , :action => 'list' }
-          end)
-
-    else
-      render :template => 'admin/questions/edit_question'
-    end
+    render :template => 'admin/questions/edit_question'
   end
 
   def delete_question
@@ -76,18 +49,7 @@ class QuestionsController < ApplicationController
       question.options.destroy_all
       question.verification_method.delete if question.verification_method
       question.delete
-    end
-    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
-    @company = Company.find(params[:company_id]) if params[:company_id]
-
-    redirect_to(
-        if params[:campaign_id]
-          { :controller => 'admin/questions' , :action => 'list', :campaign_id => params[:campaign_id] }
-        elsif params[:company_id]
-          { :controller => 'admin/questions' , :action => 'list', :company_id => params[:company_id] }
-        else
-          {:controller => 'admin/questions' , :action => 'list' }
-        end)
+     end
   end
 
   def add_options_in_text
@@ -110,6 +72,13 @@ class QuestionsController < ApplicationController
         end
       end
     end
+  end
+
+
+  def params_questions
+    debugger
+    #params.required(:questions).permit(:question_type, :name, :prefilled_field_hint, :options_attributes=> :name)
+    params.required(:questions).permit(:question_type, :name, :prefilled_field_hint, :options_attributes=> [:name, :default_value])
   end
 
 end
