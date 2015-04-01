@@ -1,5 +1,3 @@
-<%= javascript_include_tag "question" %>
-<%= stylesheet_link_tag "question" %>
 <div class="article_new_main">
   <%= form_for :questions, :url => {:action => (@question.new_record?) ? "create_question" : "update_question", :id => @question} do |f| -%>
 

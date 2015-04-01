@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $('.question_change_type').change(function () {
         var question_type = $(this).find('option:selected').attr('value');
-        // alert('question_type='+question_type);
         switch (question_type) {
             case '':
                 hide_and_disable([], ['negative_val', 'positive_val', 'max_char', 'field_length_label', 'field_length_field', 'verification'], false)
